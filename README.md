@@ -3,28 +3,30 @@
 Repository referenced in the paper, "CheXphoto: 10,000+ Smartphone Photos and Synthetic Photographic Transformations of Chest X-rays for Benchmarking Deep Learning Robustness," for generating natural and synthetic transformations. To download the full dataset or view and submit to the leaderboard, visit the [CheXphoto website](https://stanfordmlgroup.github.io/competitions/chexphoto/).
 
 ### Table of Contents
-* [Generate Natural Transformations with CheXpeditor](#natural)
-* [Generate Synthetic Transformations](#synthetic)
-* [License](#license)
-* [Citing](#citing)
+
+- [Generate Natural Transformations with CheXpeditor](#natural)
+- [Generate Synthetic Transformations](#synthetic)
+- [License](#license)
+- [Citing](#citing)
 
 ---
 
 <a name="natural"></a>
+
 ## Generating Natural Transformations with CheXpeditor
 
 We developed CheXpeditor as a workflow to expedite and automate the process of taking photos of chest x-rays. CheXpeditor offers two modes of operation:
 
-* **Manual mode**, which iterates over a CSV at a given rate, allowing the user to manually capture photographs on their device
-* **Auto mode**, which utilizes the custom CheXpeditor app to remotely and robustly trigger the phone's camera. This was used to capture the Nokia10k dataset.
+- **Manual mode**, which iterates over a CSV at a given rate, allowing the user to manually capture photographs on their device
+- **Auto mode**, which utilizes the custom CheXpeditor app to remotely and robustly trigger the phone's camera. This was used to capture the Nokia10k dataset.
 
 ### Prerequisites
 
 The most recent version of CheXpeditor has been tested to work on Python 3.8.2, but Python 3.6+ should be sufficient. Beforehand, please install the repo requirements via `pip install -r requirements.txt`.
 
-* For CheXpeditor's **manual mode**, any phone with a camera is sufficient.
+- For CheXpeditor's **manual mode**, any phone with a camera is sufficient.
 
-* For CheXpeditor's **auto mode**, a relatively recent Android smartphone is required, as it must run the CheXpeditor app. In addition, a tripod is strongly recommended for long periods of operation.
+- For CheXpeditor's **auto mode**, a relatively recent Android smartphone is required, as it must run the CheXpeditor app. In addition, a tripod is strongly recommended for long periods of operation.
 
 ### Usage (Manual Mode)
 
@@ -49,6 +51,7 @@ Options:
 ```
 
 More information on usage (and sample invocations) is available in the file-level docstring for `chexpeditor_collect_manual.py`.
+
 </details>
 
 ### Usage (Auto Mode)
@@ -61,8 +64,8 @@ In auto mode, the CheXpeditor client communicates with the CheXpeditor app runni
 #### Auto Mode Setup
 
 1. Install the CheXpeditor application on your smartphone. As of now, we only support relatively recent Android phones (Android 8+, equivalently API level 26+). There are two installation methods:
-   * **Via APK**. The CheXpeditor APK is available in `chexpeditor/server/chexpeditor-server.apk`. You can copy it directly to your phone and open it from the File Manager to install. **FOR YOUR SECURITY, do not install the APK from any other source other than this repo!** If you are unsure whether an APK you have received is safe, we also provide the Android Studio project which can be used to build the CheXpeditor app.
-   * **Via build from Android Studio**. In the case the application fails to install or function on your device, we have provided the Android Studio project which contains the necessary resources to build the CheXpeditor app.
+   - **Via APK**. The CheXpeditor APK is available in `chexpeditor/server/chexpeditor-server.apk`. You can copy it directly to your phone and open it from the File Manager to install. **FOR YOUR SECURITY, do not install the APK from any other source other than this repo!** If you are unsure whether an APK you have received is safe, we also provide the Android Studio project which can be used to build the CheXpeditor app.
+   - **Via build from Android Studio**. In the case the application fails to install or function on your device, we have provided the Android Studio project which contains the necessary resources to build the CheXpeditor app.
 2. Once installed, you may need to set the permissions for the CheXpeditor app to allow access to "Storage" (for writing files) and "Camera" (for taking pictures). Insufficient permissions can cause the app to crash.
 3. Use a tripod to mount the phone into a position in front of the monitor where an image will be visible. To test that the chest x-ray is fully in view, you can use manual mode to cycle through some images.
 4. Make sure that your computer and the phone are on the **same network**. This will enable them to communicate and exchange metadata.
@@ -73,12 +76,12 @@ Once setup is complete, you are ready to run CheXpeditor in auto mode with the f
 
 1. Start the CheXpeditor server (app) on your phone.
 
-   * In the field for `row_start`, enter the row of your CSV that you would like to begin taking photos at.
-   * Press the "Start" button. You should see a status message similar to `UDP Server is running on 10.2.1.103:4445`. This is the IP and port of the server. Save this information for the next step.
+   - In the field for `row_start`, enter the row of your CSV that you would like to begin taking photos at.
+   - Press the "Start" button. You should see a status message similar to `UDP Server is running on 10.2.1.103:4445`. This is the IP and port of the server. Save this information for the next step.
 
 2. Start the CheXpeditor client on your computer.
 
-   * The script `chexpeditor_collect_auto.py` will start the CheXpeditor client in auto mode. The usage is documented by running `python chexpeditor_collect_auto.py --help`, which is reproduced below:
+   - The script `chexpeditor_collect_auto.py` will start the CheXpeditor client in auto mode. The usage is documented by running `python chexpeditor_collect_auto.py --help`, which is reproduced below:
 
      ```
      python chexpeditor_collect_auto.py [OPTIONS]
@@ -96,9 +99,9 @@ Once setup is complete, you are ready to run CheXpeditor in auto mode with the f
 
      More information on usage (and sample invocations) is available in the file-level docstring for `chexpeditor_collect_auto.py`.
 
-   * One important thing to note is that the `--row_start` parameter passed into the script **must match** the `row_start` entered into the application UI. This ensures that the server and client are explicitly in sync.
+   - One important thing to note is that the `--row_start` parameter passed into the script **must match** the `row_start` entered into the application UI. This ensures that the server and client are explicitly in sync.
 
-   * If everything was successful, you should see the x-rays automatically advance on the computer monitor, as the CheXpeditor app automatically triggers the phone camera.
+   - If everything was successful, you should see the x-rays automatically advance on the computer monitor, as the CheXpeditor app automatically triggers the phone camera.
 
 #### Creating a Dataset from CheXpeditor Output
 
@@ -127,6 +130,7 @@ More information on usage (and sample invocations) is available in the file-leve
 ---
 
 <a name="synthetic"></a>
+
 ## Generating Synthetic Transformations
 
 The transformations were generated with Python version 3.7.6.  
@@ -161,26 +165,21 @@ python synthesize.py --perturbation glare_matte --perturbation2 moire --perturba
 
 ### Arguments
 
-- Perturbation Choices:
-  - moire
-  - blur
-  - motion
-  - glare_matte
-  - glare_glossy
-  - tilt
-  - brightness_up
-  - brightness_down
-  - contrast_up
-  - contrast_down
-  - identity
-  - random-digital
-  - rotation
-  - translation
-- Level Choices: 1, 2, 3, 4
-  - default: 1
-- Split Choices: train, valid, test
-  - Note the split must be in the path for src_csv.
-  - default: train
+---
+
+```
+Perturbation Choices:
+    moire, blur, motion, glare_matte, glare_glossy, tilt, brightness_up, brightness_down, contrast_up, contrast_down, identity, random-digital, rotation, translation
+
+Level Choices:
+    1, 2, 3, 4
+    default: 1
+
+Split Choices:
+    train, valid, test
+    default: train
+    Note the split must be in the path for src_csv.
+```
 
 ### Other Optional Arguments
 
@@ -196,11 +195,13 @@ It is expected that `src_csv` contains a column which can be parsed by pandas as
 ---
 
 <a name="license"></a>
+
 ## License
 
 This repository is made publicly available under the MIT License.
 
 <a name="citing"></a>
+
 ## Citing
 
 If you are using the CheXphoto dataset, please cite this paper:
