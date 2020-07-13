@@ -13,7 +13,7 @@ import pandas as pd
 import numpy as np
 import concurrent.futures
 
-from constants import LEVELS, PERTURBATIONS
+from transforms.constants import LEVELS, PERTURBATIONS
 
 
 COL_PATH = 'Path'
