@@ -113,6 +113,24 @@ def path_to_filename(seq, orig_path):
     return "__".join([str(seq), str(nonce)] + list(orig_path.parts))
 
 
+def filename_to_path(name):
+    """Parse a CheXpeditor filename and convert it to a Path.
+
+    Args:
+        name (str): A CheXpeditor filename
+
+    Returns:
+        seq (int): The associated sequence number
+        path (Path): The actual path encoded in the filename
+
+    """
+    # Parse the name and discard the nonce and original split name
+    name_parts = name.split("__")
+    seq = int(name_parts[0])
+    path = Path(*name_parts[2:])  # name_parts[1] is the nonce, which we skip
+    return seq, path
+
+
 def send_message(ip, port, seq, msg, timeout_s):
     """Send a message to the CheXpeditor server.
 
