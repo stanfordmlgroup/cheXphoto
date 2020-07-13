@@ -16,7 +16,7 @@ For more detailed information about the available args, please run:
 
 """
 
-from natural.chexpeditor_client import get_base_parser, run
+from chexpeditor.client import get_base_parser, run
 
 
 def add_manual_args(parser):

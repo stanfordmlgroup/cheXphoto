@@ -18,7 +18,7 @@ For more detailed information about the available args, please run:
     python chexpeditor_collect_auto.py --help
 
 """
-from natural.chexpeditor_client import get_base_parser, run
+from chexpeditor.client import get_base_parser, run
 
 
 def add_auto_args(parser):

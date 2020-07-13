@@ -10,7 +10,7 @@ from pathlib import Path
 
 import cv2
 
-from natural.util import load_data, display_img, path_to_filename, send_message
+from chexpeditor.util import load_data, display_img, path_to_filename, send_message
 
 # General constants
 WINDOW_NAME = "CheXpeditor Client"

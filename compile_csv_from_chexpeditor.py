@@ -32,7 +32,7 @@ from shutil import copy
 import pandas as pd
 from tqdm import tqdm
 
-from natural.util import filename_to_path
+from chexpeditor.util import filename_to_path
 
 COL_PATH = "Path"
 
