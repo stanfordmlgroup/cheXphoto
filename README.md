@@ -1,12 +1,17 @@
 ![LOGO](/img/CheXphoto.png)
 
-Repository referenced in the paper, "CheXphoto: 10,000+ Smartphone Photos and Synthetic Photographic Transformations of Chest X-rays for Benchmarking Deep Learning Robustness," for generating synthetic and natural transformations. To download the full dataset or view and submit to the leaderboard, visit the [CheXphoto website](https://stanfordmlgroup.github.io/competitions/chexphoto/).
+Repository referenced in the paper, "CheXphoto: 10,000+ Smartphone Photos and Synthetic Photographic Transformations of Chest X-rays for Benchmarking Deep Learning Robustness," for generating natural and synthetic transformations. To download the full dataset or view and submit to the leaderboard, visit the [CheXphoto website](https://stanfordmlgroup.github.io/competitions/chexphoto/).
 
-##### Table of Contents
-[Generate Synthetic Transformations](#synthetic)
-[Generate Natural Transformations with CheXpeditor](#natural)
-[License](#license)
-[Citing](#citing)
+### Table of Contents
+* [Generate Natural Transformations with CheXpeditor](#natural)
+* [Generate Synthetic Transformations](#synthetic)
+* [License](#license)
+* [Citing](#citing)
+
+---
+
+<a name="natural"></a>
+## Generating Natural Transformations with CheXpeditor
 
 ---
 
