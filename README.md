@@ -169,7 +169,9 @@ python synthesize.py --perturbation glare_matte --perturbation2 moire --perturba
 
 ```
 Perturbation Choices:
-    moire, blur, motion, glare_matte, glare_glossy, tilt, brightness_up, brightness_down, contrast_up, contrast_down, identity, random-digital, rotation, translation
+    moire, blur, motion, glare_matte, glare_glossy, tilt,
+    brightness_up, brightness_down, contrast_up, contrast_down,
+    identity, random-digital, rotation, translation
 
 Level Choices:
     1, 2, 3, 4
