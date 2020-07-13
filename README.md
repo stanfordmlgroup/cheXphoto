@@ -1,4 +1,4 @@
-![LOGO](img/CheXphoto.png)
+![LOGO](/img/CheXphoto.png)
 
 # Generate Synthetic Images
 

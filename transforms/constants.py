@@ -1,20 +1,20 @@
 """Directory of all perturbations and levels."""
 
-from moire import moire_mapping
-from blur import blur_mapping
-from motion import motion_mapping
-from glare_matte import glare_matte_mapping
-from glare_glossy import glare_glossy_mapping
-from tilt import tilt_mapping
-from brightness_up import brightness_up_mapping
-from brightness_down import brightness_down_mapping
-from contrast_up import contrast_up_mapping
-from contrast_down import contrast_down_mapping
-from identity import identity_mapping
-from random_digital import random_digital_mapping
-from rotation import rotation_mapping
-from translation import translation_mapping
-from exposure import exposure_mapping
+from transforms.moire import moire_mapping
+from transforms.blur import blur_mapping
+from transforms.motion import motion_mapping
+from transforms.glare_matte import glare_matte_mapping
+from transforms.glare_glossy import glare_glossy_mapping
+from transforms.tilt import tilt_mapping
+from transforms.brightness_up import brightness_up_mapping
+from transforms.brightness_down import brightness_down_mapping
+from transforms.contrast_up import contrast_up_mapping
+from transforms.contrast_down import contrast_down_mapping
+from transforms.identity import identity_mapping
+from transforms.random_digital import random_digital_mapping
+from transforms.rotation import rotation_mapping
+from transforms.translation import translation_mapping
+from transforms.exposure import exposure_mapping
 
 PERTURBATIONS = {'moire': moire_mapping,
                  'blur': blur_mapping,
