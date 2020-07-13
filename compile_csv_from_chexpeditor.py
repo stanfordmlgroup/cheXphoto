@@ -4,7 +4,7 @@ This should be run after copying the CheXpeditor photos to a locally accessible 
 
 The following example assumes that the CheXphoto-v1.0 folder is located in a
 directory called data/:
-    python -m natural.build_csv
+    python compile_csv_from_chexpeditor.py
         --src_csv_path data/CheXphoto-v1.0/valid/valid.csv
         --src_row_start 0
         --src_row_end 3
@@ -22,7 +22,7 @@ This ensures that images from the original dataset are not mixed with the new on
 also serves as a rudimentary form of revision history.
 
 For more detailed information about the available args, please run:
-    python -m natural.build_csv --help
+    python compile_csv_from_chexpeditor.py --help
 
 """
 from argparse import ArgumentParser

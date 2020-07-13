@@ -5,7 +5,7 @@ your Android device.
 
 The following example assumes that the CheXphoto-v1.0 folder is located in a
 directory called data/:
-    python collect_natural_manual.py
+    python chexpeditor_collect_auto.py
         --csv_path data/CheXphoto-v1.0/valid/valid.csv
         --data_dir data/
         --row_start 3  # must match starting row in CheXpeditor app
@@ -15,7 +15,7 @@ directory called data/:
         --ip 10.0.2.127  # dummy IP, use one shown in CheXpeditor app
 
 For more detailed information about the available args, please run:
-    python collect_natural_auto.py --help
+    python chexpeditor_collect_auto.py --help
 
 """
 from natural.chexpeditor_client import get_base_parser, run

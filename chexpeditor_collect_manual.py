@@ -2,7 +2,7 @@
 
 The following example assumes that the CheXphoto-v1.0 folder is located in a
 directory called data/:
-    python collect_natural_manual.py
+    python chexpeditor_collect_manual.py
         --csv_path data/CheXphoto-v1.0/valid/valid.csv
         --data_dir data/
         --row_start 3
@@ -12,7 +12,7 @@ directory called data/:
         --delay 1000  # in milliseconds
 
 For more detailed information about the available args, please run:
-    python collect_natural_manual.py --help
+    python chexpeditor_collect_manual.py --help
 
 """
 
