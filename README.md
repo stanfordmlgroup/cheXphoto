@@ -30,6 +30,9 @@ The most recent version of CheXpeditor has been tested to work on Python 3.8.2, 
 
 In manual mode, the CheXpeditor client iterates through a CSV and shows x-rays at a specified rate, or upon receiving a keypress. The user manually triggers the camera when the image changes. Extra care must be taken to properly correlate the photos of the x-rays to the original x-rays in order to correctly assign the respective labels.
 
+<details>
+  <summary>Detailed Instructions (Manual Mode)</summary>
+  
 The script `chexpeditor_collect_manual.py` will run CheXpeditor in manual mode. The usage is documented by running `python chexpeditor_collect_manual.py --help`, which is reproduced below:
 
 ```
@@ -46,10 +49,14 @@ Options:
 ```
 
 More information on usage (and sample invocations) is available in the file-level docstring for `chexpeditor_collect_manual.py`.
+</details>
 
 ### Usage (Auto Mode)
 
 In auto mode, the CheXpeditor client communicates with the CheXpeditor app running on a smartphone to remotely and robustly trigger the phone's camera. As the image's metadata is embedded in the filename, auto mode also provides functionality to batch postprocess the CheXpeditor output to create a CSV and dataset in CheXphoto format.
+
+<details>
+  <summary>Detailed Instructions (Auto Mode)</summary>
 
 #### Auto Mode Setup
 
@@ -114,6 +121,8 @@ Options:
 ```
 
 More information on usage (and sample invocations) is available in the file-level docstring for `compile_csv_from_chexpeditor.py`.
+
+</details>
 
 ---
 
