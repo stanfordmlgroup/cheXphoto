@@ -1,3 +1,2 @@
 !test_images/*.jpg
 __pycache__/
-*.png
