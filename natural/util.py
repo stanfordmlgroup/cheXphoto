@@ -1,13 +1,15 @@
-import numpy as np
-from PIL import Image
-from pathlib import Path
-import pandas as pd
-import cv2
+"""Implement utility functions used in chexpeditor_client.py."""
 import random
+from pathlib import Path
 from socket import AF_INET, SOCK_DGRAM, socket, timeout
 
+import cv2
+import numpy as np
+import pandas as pd
+from PIL import Image
+
 MAX_NONCE = 100
-COL_PATH = 'Path'
+COL_PATH = "Path"
 
 
 def add_background(img, out_width, out_height):
@@ -23,12 +25,11 @@ def add_background(img, out_width, out_height):
 
     """
     # Create black background with same size as screen
-    background = Image.new('RGB', (out_width, out_height), (0, 0, 0))
+    background = Image.new("RGB", (out_width, out_height), (0, 0, 0))
 
     # Fit original image within screen while preserving aspect ratio
     img_width, img_height = img.size
-    scale_factor = min(float(out_height) / img_height,
-                       float(out_width) / img_width)
+    scale_factor = min(float(out_height) / img_height, float(out_width) / img_width)
     new_height = int(scale_factor * img_height)
     new_width = int(scale_factor * img_width)
     img = img.resize((new_width, new_height), Image.ANTIALIAS)
@@ -41,16 +42,36 @@ def add_background(img, out_width, out_height):
 
 
 def load_data(csv_path, data_dir, row_start, row_end):
+    """Load a specified range of image filenames from a CSV.
+
+    Args:
+        csv_path (Path): path to the CSV file, in CheXphoto format
+        data_dir (Path): the location of the dataset. Concatenating this
+            directory name with a path in the CSV should produce a valid
+            relative path!
+        row_start (int): row index of the first entry to load (inclusive)
+        row_end (int): row index of the last entry to load (exclusive). If None,
+            all entries until the end will be loaded.
+
+    Returns:
+        img_paths ([Path]): list of resolved image paths
+        orig_paths ([Path]): list of the raw image paths in the CSV. Used for
+            creating the raw image filename that will be later reassociated
+            to labels in the original CSV.
+
+    """
     assert Path(csv_path).exists()
     # Load image paths from CSV and resolve relative to data_dir
     df = pd.read_csv(csv_path)
-    orig_paths = list(map(Path, df[COL_PATH]))
-    img_paths = list(map(lambda path: data_dir / path, orig_paths))
+
     # Select images based on given range
+    orig_paths = list(map(Path, df[COL_PATH]))
     if row_end is None:
-        img_paths = img_paths[row_start:]
+        orig_paths = orig_paths[row_start:]
     else:
-        img_paths = img_paths[row_start: row_end]
+        orig_paths = orig_paths[row_start:row_end]
+    img_paths = list(map(lambda path: data_dir / path, orig_paths))
+
     # Check that all images in range exist
     for img_path in img_paths:
         assert img_path.exists(), f"Could not locate image {str(img_path)}!"
@@ -58,18 +79,38 @@ def load_data(csv_path, data_dir, row_start, row_end):
 
 
 def display_img(window_name, img_path, screen_width, screen_height, i):
-    print(f'[{i}]: Showing image {str(img_path)}...')
-    # Need to convert back to str for compatibility with Win-SSHFS
-    img = Image.open(str(img_path)).convert('RGB')
+    """Display an image on the screen, overlaid on a black background.
+
+    Args:
+        window_name (str): name of OpenCV window
+        img_path (Path): local path to image to load and display
+        screen_width (int): width (in px) of the screen
+        screen_height (int): height (in px) of the screen
+        i (int): the index of the image
+
+    """
+    print(f"[{i}]: Showing image {str(img_path)}...")
+    img = Image.open(str(img_path)).convert("RGB")
     img = add_background(img, screen_width, screen_height)
     img = np.array(img)[..., ::-1]
     cv2.imshow(window_name, img)
 
 
-def path_to_filename(seq, img_path):
+def path_to_filename(seq, orig_path):
+    """Convert an image path to a CheXpeditor format filename.
+
+    Args:
+        seq (int): the sequence number of the file
+        orig_path (Path): the original image path listed in the CSV
+
+    Returns:
+        (str): a CheXpeditor format filename, under which the file will be
+            saved on the Android device
+
+    """
     # Nonce is needed since Android caches photos with same filename
     nonce = random.randint(0, MAX_NONCE)
-    return '__'.join([str(seq), str(nonce)] + list(img_path.parts))
+    return "__".join([str(seq), str(nonce)] + list(orig_path.parts))
 
 
 def send_message(ip, port, seq, msg, timeout_s):
@@ -80,6 +121,8 @@ def send_message(ip, port, seq, msg, timeout_s):
         port (int): server port
         seq (int): message sequence number
         msg (str): message data
+        timeout_s (int): how long the client should wait for the server
+            response before declaring timeout
 
     Returns:
         (str): the decoded server response
@@ -87,9 +130,9 @@ def send_message(ip, port, seq, msg, timeout_s):
     """
     client_socket = socket(AF_INET, SOCK_DGRAM)
     client_socket.settimeout(timeout_s)
-    client_socket.sendto((str(seq) + '|' + msg).encode(), (ip, port))
+    client_socket.sendto((str(seq) + "|" + msg).encode(), (ip, port))
     try:
         data, ip = client_socket.recvfrom(1024)
-        return data.decode('utf-8')
+        return data.decode("utf-8")
     except timeout:
-        return 'TIMEOUT'
+        return "TIMEOUT"
