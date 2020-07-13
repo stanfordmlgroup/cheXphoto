@@ -1,19 +1,22 @@
 ![LOGO](/img/CheXphoto.png)
 
-# Generate Synthetic Images
+Repository referenced in the paper, "CheXphoto: 10,000+ Smartphone Photos and Synthetic Photographic Transformations of Chest X-rays for Benchmarking Deep Learning Robustness," for generating synthetic and natural transformations. To download the full dataset or view and submit to the leaderboard, visit the [CheXphoto website](https://stanfordmlgroup.github.io/competitions/chexphoto/).
 
-Repository referenced in the paper, "CheXphoto: 10,000+ Smartphone Photos and Synthetic Photographic Transformations of Chest X-rays for Benchmarking Deep Learning Robustness," for generating synthetic transformations. To download the full dataset or view and submit to the leaderboard, visit the [CheXphoto website](https://stanfordmlgroup.github.io/competitions/chexphoto/).
-
-## Usage
+##### Table of Contents
+[Generate Synthetic Transformations](#synthetic)
+[Generate Natural Transformations with CheXpeditor](#natural)
+[License](#license)
+[Citing](#citing)
 
 ---
+
+<a name="synthetic"></a>
+## Generating Synthetic Transformations
 
 The transformations were generated with Python version 3.7.6.  
 `pip install -r requirements.txt`
 
 ### Usage
-
----
 
 ```
 Usage: python synthesize.py [OPTIONS]
@@ -28,8 +31,6 @@ Options:
 
 ### Reproduce Digital and Photographic Dataset Generation
 
----
-
 Digital Synthetic:
 
 ```
@@ -43,8 +44,6 @@ python synthesize.py --perturbation glare_matte --perturbation2 moire --perturba
 ```
 
 ### Arguments
-
----
 
 - Perturbation Choices:
   - moire
@@ -69,28 +68,24 @@ python synthesize.py --perturbation glare_matte --perturbation2 moire --perturba
 
 ### Other Optional Arguments
 
----
-
 `perturbation2` Applies the given perturbation after `perturbation`  
 `perturbation3` Applies the given perturbation after `perturbation2`
 
-## Notes
-
----
+### Notes
 
 For most transformations, the bottleneck is reading/writing image files. As a result,the script makes use of Python's parallel processing.
 
 It is expected that `src_csv` contains a column which can be parsed by pandas as `Path`, containing the paths to each of the images to be transformed.
 
-## License
-
 ---
+
+<a name="license"></a>
+## License
 
 This repository is made publicly available under the MIT License.
 
+<a name="citing"></a>
 ## Citing
-
----
 
 If you are using the CheXphoto dataset, please cite this paper:
 
