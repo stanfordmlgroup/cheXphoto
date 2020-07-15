@@ -4,12 +4,28 @@ Repository referenced in the paper, "CheXphoto: 10,000+ Smartphone Photos and Sy
 
 ### Table of Contents
 
+- [Prerequisites](#prereqs)
 - [Generate Natural Transformations with CheXpeditor](#natural)
 - [Generate Synthetic Transformations](#synthetic)
 - [License](#license)
 - [Citing](#citing)
 
 ---
+
+<a name="prereqs"></a>
+
+## Prerequisites
+
+Python 3.7+ should be sufficient to run the code in the repo. The natural transformation code has been tested with Python 3.8.2, while the synthetic transformations were generated using Python 3.7.6.
+
+Before starting, please install the repo Python requirements using the following command:
+```
+pip install -r requirements.txt
+```
+
+Note the following additional requirements for generating **natural transformations**:
+* For **manual** photo acquisition, any phone with a camera is sufficient.
+* For **automatic** photo acquisition, a relatively recent Android smartphone is required since it must run the CheXpeditor app. In addition, a tripod is strongly recommended for long periods of operation. Please see additional details in the [usage instructions for auto mode](#auto).
 
 <a name="natural"></a>
 
@@ -19,14 +35,6 @@ We developed CheXpeditor as a workflow to expedite and automate the process of t
 
 - **Manual mode**, which iterates over a CSV at a given rate, allowing the user to manually capture photographs on their device
 - **Auto mode**, which utilizes the custom CheXpeditor app to remotely and robustly trigger the phone's camera. This was used to capture the Nokia10k dataset.
-
-### Prerequisites
-
-The most recent version of CheXpeditor has been tested to work on Python 3.8.2, but Python 3.6+ should be sufficient. Beforehand, please install the repo requirements via `pip install -r requirements.txt`.
-
-- For CheXpeditor's **manual mode**, any phone with a camera is sufficient.
-
-- For CheXpeditor's **auto mode**, a relatively recent Android smartphone is required, as it must run the CheXpeditor app. In addition, a tripod is strongly recommended for long periods of operation.
 
 ### Usage (Manual Mode)
 
@@ -53,6 +61,8 @@ Options:
 More information on usage (and sample invocations) is available in the file-level docstring for `chexpeditor_collect_manual.py`.
 
 </details>
+
+<a name="auto"></a>
 
 ### Usage (Auto Mode)
 
@@ -133,8 +143,7 @@ More information on usage (and sample invocations) is available in the file-leve
 
 ## Generating Synthetic Transformations
 
-The transformations were generated with Python version 3.7.6.  
-`pip install -r requirements.txt`
+`synthesize.py` is the key script for applying synthetic transformations to data. The implementations of the various synthetic transformations are available in the `transforms/` subfolder.
 
 ### Usage
 
